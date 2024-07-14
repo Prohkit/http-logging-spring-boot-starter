@@ -41,19 +41,19 @@
   
 При формате - **text**, уровне логирования - **INFO**:  
   
-![info](../../../Users/Admin/Desktop/К заданию/info.jpg)  
+![info.jpg](img/info.jpg)  
 
 При логировании **исходящего запроса**:  
   
-![](../../../Users/Admin/Desktop/К заданию/info out.jpg)  
+![info out.jpg](img/info%20out.jpg)  
   
 При формате - **text**, уровне логирования - **DEBUG**:  
   
-![](../../../Users/Admin/Desktop/К заданию/debug.jpg)  
+![debug.jpg](img/debug.jpg)  
   
 При формате - **json**:  
   
-![](../../../Users/Admin/Desktop/К заданию/json.jpg)  
+![json.jpg](img/json.jpg)  
   
 Пример **json**:  
 ```json
