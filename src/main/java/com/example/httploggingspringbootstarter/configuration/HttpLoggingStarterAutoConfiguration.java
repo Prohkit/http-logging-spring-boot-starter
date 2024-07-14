@@ -1,5 +1,6 @@
 package com.example.httploggingspringbootstarter.configuration;
 
+import com.example.httploggingspringbootstarter.exception.handler.HttpLoggingExceptionHandler;
 import com.example.httploggingspringbootstarter.interceptor.ControllerLoggingInterceptor;
 import com.example.httploggingspringbootstarter.interceptor.RestClientLoggingInterceptor;
 import com.example.httploggingspringbootstarter.service.LoggingService;
@@ -64,5 +65,11 @@ public class HttpLoggingStarterAutoConfiguration {
     @ConditionalOnMissingBean(ObjectMapper.class)
     public ObjectMapper objectMapperHttpLoggingStarter() {
         return new ObjectMapper();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "http.logging", value = "enabled", havingValue = "true")
+    public HttpLoggingExceptionHandler httpLoggingExceptionHandler() {
+        return new HttpLoggingExceptionHandler();
     }
 }

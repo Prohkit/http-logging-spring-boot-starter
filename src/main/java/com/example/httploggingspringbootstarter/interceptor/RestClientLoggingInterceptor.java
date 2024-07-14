@@ -1,5 +1,6 @@
 package com.example.httploggingspringbootstarter.interceptor;
 
+import com.example.httploggingspringbootstarter.exception.HttpLoggingOutgoingRequestException;
 import com.example.httploggingspringbootstarter.model.LogData;
 import com.example.httploggingspringbootstarter.service.LoggingService;
 import lombok.AllArgsConstructor;
@@ -18,14 +19,18 @@ public class RestClientLoggingInterceptor implements ClientHttpRequestIntercepto
     private final LoggingService loggingService;
 
     @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        long startTime = System.currentTimeMillis();
-        ClientHttpResponse clientHttpResponse = execution.execute(request, body);
-        long executionTime = System.currentTimeMillis() - startTime;
+    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) {
+        try {
+            long startTime = System.currentTimeMillis();
+            ClientHttpResponse clientHttpResponse = execution.execute(request, body);
+            long executionTime = System.currentTimeMillis() - startTime;
 
-        LogData logData = loggingService.getRestClientLog(request, clientHttpResponse, executionTime);
-        loggingService.printRestClientWelcomeMessage();
-        loggingService.printLog(logData);
-        return clientHttpResponse;
+            LogData logData = loggingService.getRestClientLog(request, clientHttpResponse, executionTime);
+            loggingService.printRestClientWelcomeMessage();
+            loggingService.printLog(logData);
+            return clientHttpResponse;
+        } catch (IOException e) {
+            throw new HttpLoggingOutgoingRequestException("Ошибка при выполнении исходящего запроса");
+        }
     }
 }
