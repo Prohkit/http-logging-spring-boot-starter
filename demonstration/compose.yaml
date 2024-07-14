@@ -1,0 +1,24 @@
+services:
+  first-service:
+    image: service:latest
+    build:
+      context: .
+    container_name: first-service
+    ports:
+      - 8080:8080
+    environment:
+      - HTTP_LOGGING_ENABLED=true
+      - HTTP_LOGGING_FORMAT=text
+      - HTTP_LOGGING_LEVEL=INFO
+      - LOGGING_PATTERN_CONSOLE="%clr(%logger{36}){cyan} -- %msg%n"
+      - CLIENT_URI=http://second-service:8081/test
+
+  second-service:
+    image: service:latest
+    build:
+      context: .
+    container_name: second-service
+    ports:
+      - 8081:8081
+    environment:
+      - SERVER_PORT=8081
