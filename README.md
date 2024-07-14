@@ -71,7 +71,14 @@
   
 
 Или для gradle:  
-`implementation("com.example:http-logging-spring-boot-starter:0.0.1-SNAPSHOT")`
+`implementation("com.example:http-logging-spring-boot-starter:0.0.1-SNAPSHOT")`  
+
+Также для gradle нужно, чтобы в repositories был указан mavenLocal.  
+```text
+repositories {
+    mavenLocal()
+}
+```
   
 4. Для включения логирования в application.properties указать свойство:
 `http.logging.enabled=true`  
